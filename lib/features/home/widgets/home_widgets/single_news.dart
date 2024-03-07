@@ -6,8 +6,8 @@ import 'package:news_app/constants/textstyle.dart';
 import 'package:news_app/features/home/models/news_model.dart';
 
 class SingleNews extends StatelessWidget {
-  final NewsModel recommendedNews;
-  const SingleNews({super.key, required this.recommendedNews});
+  final NewsModel news;
+  const SingleNews({super.key, required this.news});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class SingleNews extends StatelessWidget {
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(14.r),
                   child: CachedNetworkImage(
-                    imageUrl: recommendedNews.urlToImage.toString(),
+                    imageUrl: news.urlToImage.toString(),
                     errorWidget: (context, url, error) {
                       return const Center(
                         child: Icon(Icons.error),
@@ -53,14 +53,14 @@ class SingleNews extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      recommendedNews.source!["name"].toString(),
+                      news.source!["name"].toString(),
                       style: appStyle(
                           color: Colors.black45,
                           fw: FontWeight.w500,
                           size: 12.sp),
                     ),
                     Text(
-                      recommendedNews.title.toString(),
+                      news.title.toString(),
                       style: appStyle(
                           color: Colors.black,
                           fw: FontWeight.w600,
@@ -69,14 +69,14 @@ class SingleNews extends StatelessWidget {
                     Wrap(
                       children: [
                         Text(
-                          "Author: ${recommendedNews.author.toString()}",
+                          "Author: ${news.author.toString()}",
                           style: appStyle(
                               color: Colors.black45,
                               fw: FontWeight.w500,
                               size: 10.sp),
                         ),
                         Text(
-                          recommendedNews.publishedAt.toString(),
+                          news.publishedAt.toString(),
                           style: appStyle(
                               color: Colors.black45,
                               fw: FontWeight.w500,

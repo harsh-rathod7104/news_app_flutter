@@ -1,5 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +12,7 @@ import 'package:news_app/features/home/widgets/home_widgets/home_appBar.dart';
 import 'package:news_app/features/home/widgets/home_widgets/news_slider.dart';
 import 'package:news_app/features/home/widgets/home_widgets/news_slider_indicator.dart';
 import 'package:news_app/features/home/widgets/home_widgets/recommended_news_list.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class HomeScreenUI extends StatelessWidget {
   const HomeScreenUI({super.key});
@@ -67,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           } else {
             return CustomScrollView(
+              physics: const BouncingScrollPhysics(),
               slivers: [
                 // const HomeAppBar(),
                 SliverList(
@@ -75,7 +76,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       Column(
                         children: [
                           SizedBox(height: 5.h),
-                          Heading(title: "Breaking News", onButtonPress: () {}),
+                          Heading(
+                              title: "Breaking News",
+                              onButtonPress: () {
+                                PersistentNavBarNavigator.pushNewScreen(
+                                  context,
+                                  screen:
+                                      ViewAllNewsScreen(newsList: topHeadlines),
+                                  withNavBar: false,
+                                  pageTransitionAnimation:
+                                      PageTransitionAnimation.cupertino,
+                                );
+                              }),
                           SizedBox(height: 10.h),
                           NewsSlider(
                               topHeadlines: topHeadlines,
@@ -83,14 +95,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           NewsSliderIndicator(topHeadlines: topHeadlines),
                           SizedBox(height: 18.h),
                           Heading(
-                              title: "Recommendation",
-                              onButtonPress: () {
-                                Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(
-                                        builder: (context) =>
-                                            ViewAllNewsScreen()));
-                              }),
+                            title: "Recommendation",
+                            onButtonPress: () {
+                              PersistentNavBarNavigator.pushNewScreen(
+                                context,
+                                screen: ViewAllNewsScreen(newsList: techCrunch),
+                                withNavBar: false,
+                                pageTransitionAnimation:
+                                    PageTransitionAnimation.cupertino,
+                              );
+                            },
+                          ),
                         ],
                       )
                     ],

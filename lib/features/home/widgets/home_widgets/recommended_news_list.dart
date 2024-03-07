@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/features/home/models/news_model.dart';
+import 'package:news_app/features/home/screens/news_detail_screen.dart';
 import 'package:news_app/features/home/widgets/home_widgets/single_news.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class RecommendedNews extends StatelessWidget {
   final List<NewsModel> recommendedNewsList;
@@ -12,7 +14,14 @@ class RecommendedNews extends StatelessWidget {
       itemCount: recommendedNewsList.length,
       itemBuilder: (context, index) {
         final NewsModel recommendNews = recommendedNewsList[index];
-        return SingleNews(recommendedNews: recommendNews);
+        return GestureDetector(
+          onTap: () {
+            PersistentNavBarNavigator.pushNewScreen(context,
+                withNavBar: false,
+                screen: NewsDetailScreen(news: recommendNews));
+          },
+          child: SingleNews(news: recommendNews),
+        );
       },
     );
   }

@@ -7,6 +7,7 @@ import 'package:news_app/features/home/bloc/home_event.dart';
 import 'package:news_app/features/home/bloc/screen_cubit/screen_cubit.dart';
 import 'package:news_app/features/home/data/home_repository.dart';
 import 'package:news_app/features/home/screens/main_screen.dart';
+import 'package:news_app/features/home/screens/news_detail_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
